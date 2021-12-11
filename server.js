@@ -13,9 +13,8 @@ import { errorMiddle } from "./middlewares/errorMiddle.js";
 const app = express();
 app.use(function (req, res, next) {
     // CORS headers
-    res.header("Access-Control-Allow-Origin", "YOUR_URL"); // restrict it to the required domain
+    res.header("Access-Control-Allow-Origin", "https://todo-app-zeta-two.vercel.app"); // restrict it to the required domain
     res.header("Access-Control-Allow-Methods", "GET,PUT,POST,DELETE,OPTIONS");
-    // Set custom headers for CORS
     res.header("Access-Control-Allow-Headers", "Content-type,Accept,X-Custom-Header");
 
     if (req.method === "OPTIONS") {
