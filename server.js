@@ -21,7 +21,7 @@ app.use(express.json())
 app.use(cookieParser());
 app.use(cors({
     credentials:true,
-    origin: "https://todo-app-zeta-two.vercel.app",
+    origin: true,
 }));
 
 app.use("/user",registration)
