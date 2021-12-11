@@ -11,25 +11,13 @@ import tasks from "./routes/tasks.js"
 import { errorMiddle } from "./middlewares/errorMiddle.js";
 
 const app = express();
-app.use(function (req, res, next) {
-    // CORS headers
-    res.header("Access-Control-Allow-Origin", "https://todoapp231.herokuapp.com/"); // restrict it to the required domain
-    res.header("Access-Control-Allow-Methods", "GET,PUT,POST,DELETE,OPTIONS");
-    res.header("Access-Control-Allow-Headers", "Content-type,Accept,X-Custom-Header");
-    res.setHeader('Access-Control-Allow-Credentials', true);
-    if (req.method === "OPTIONS") {
-        return res.status(200).end();
-    }
-
-    return next();
-});
-app.use(express.urlencoded({ extended: true }));
-app.use(express.json())
-app.use(cookieParser());
 app.use(cors({
     credentials:true,
     origin: true,
 }));
+app.use(express.urlencoded({ extended: true }));
+app.use(express.json())
+app.use(cookieParser());
 
 app.use("/user",registration)
 app.use("/methods",tasks)
