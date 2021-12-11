@@ -25,9 +25,12 @@ app.use(cors({
 app.use("/user",registration)
 app.use("/methods",tasks)
 app.use(errorMiddle)
+app.get("/hello",(req,res)=>{
+    res.json({hello:"ok"})
+})  
 app.get('*', (req, res) => {
     res.sendFile(path.join(__dirname, 'dist', 'index.html'));
-});  
+});
 const start =  async () => {
     try {
         app.listen(process.env.PORT || 3000, ()=>{console.log("server started")})
