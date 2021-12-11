@@ -11,10 +11,18 @@ import tasks from "./routes/tasks.js"
 import { errorMiddle } from "./middlewares/errorMiddle.js";
 
 const app = express();
-app.use(function(req, res, next) {
-    res.header("Access-Control-Allow-Origin", "https://todo-app-zeta-two.vercel.app");
-    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
-    next();
+app.use(function (req, res, next) {
+    // CORS headers
+    res.header("Access-Control-Allow-Origin", "YOUR_URL"); // restrict it to the required domain
+    res.header("Access-Control-Allow-Methods", "GET,PUT,POST,DELETE,OPTIONS");
+    // Set custom headers for CORS
+    res.header("Access-Control-Allow-Headers", "Content-type,Accept,X-Custom-Header");
+
+    if (req.method === "OPTIONS") {
+        return res.status(200).end();
+    }
+
+    return next();
 });
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json())
