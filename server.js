@@ -19,7 +19,7 @@ app.use(express.json())
 app.use(cookieParser());
 app.use(cors({
     credentials:true,
-    origin: "http://localhost:5000",
+    origin: "https://todoapp231.herokuapp.com",
 }));
 
 app.use("/user",registration)
