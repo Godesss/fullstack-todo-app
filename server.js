@@ -12,7 +12,7 @@ import { errorMiddle } from "./middlewares/errorMiddle.js";
 
 const app = express();
 const corsOptions = {
-    origin : "http://localhost:3000",
+    origin : "*",
     optionsSuccessStatus:200,
     credentials:true,
 }
