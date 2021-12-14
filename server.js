@@ -13,7 +13,7 @@ import { errorMiddle } from "./middlewares/errorMiddle.js";
 const app = express();
 app.use(cors({
     credentials:true,
-    origin: true,
+    origin: "http://localhost:3000",
 }));
 app.options('*', cors())
 app.use(express.urlencoded({ extended: true }));
