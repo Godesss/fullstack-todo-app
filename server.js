@@ -11,30 +11,12 @@ import tasks from "./routes/tasks.js"
 import { errorMiddle } from "./middlewares/errorMiddle.js";
 
 const app = express();
-app.use(cors({
+const corsOptions = {
+    origin : "http://localhost:3000",
+    optionsSuccessStatus:200,
     credentials:true,
-    preflightContinue: true,
-    origin: "http://localhost:3000"
-}));
-app.use(function(request, response, next){
-
-    response.header('Access-Control-Allow-Origin', 'http://localhost:3000');
-    response.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE,OPTIONS');
-    response.header('Access-Control-Allow-Headers', 'Content-Type, Authorization, Content-Length, X-Requested-With');
-    response.header("Access-Control-Allow-Credentials", true);
-    if (reqest.method === 'OPTIONS') {
-        response.status(200).send();        
-    }
-    else {
-        next();
-    }
-});
-/*app.use((req,res,next)=>{
-    res.header('Access-Control-Allow-Origin', 'http://localhost:3000');
-    res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE');
-    res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept')
-    next();
-})*/
+}
+app.use(cors(corsOptions))
 app.use(cookieParser());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json())
