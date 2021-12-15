@@ -6,14 +6,16 @@ import cors from "cors"
 import dotenv from "dotenv"
 dotenv.config()
 
+import path from "path"
+const __dirname = path.resolve()
+
 import registration from "./routes/auth.js"
 import tasks from "./routes/tasks.js"
 import { errorMiddle } from "./middlewares/errorMiddle.js";
 
 const app = express();
 const corsOptions = {
-    origin : "http://localhost:3000",
-    optionsSuccessStatus:200,
+    origin : `${process.env.BASE_URL}`,
     credentials:true,
 }
 app.use(cors(corsOptions))
@@ -24,6 +26,11 @@ app.use(express.json())
 app.use("/user",registration)
 app.use("/methods",tasks)
 app.use(errorMiddle)
+app.use(express.static(path.join(__dirname,"dist")));
+app.get('*', function(req, res) {
+    res.sendFile(path.join(__dirname+'/dist/index.html'));
+});
+
 const start =  async () => {
     try {
         app.listen(process.env.PORT || 3000, ()=>{console.log("server started")})
@@ -33,4 +40,5 @@ const start =  async () => {
         console.log(e.message)
     }
 }
+
 start()
