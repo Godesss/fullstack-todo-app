@@ -37,36 +37,9 @@ class AuthController {
     }
     async resetPassword(req,res,next) {
         try {
-            await userService.resetPassword(req.body.email);
+            const {email,password} = req.body
+            await userService.resetPassword({email,password});
             res.json({message:"ok"})
-        }
-        catch(e) {
-            next(e)
-        }
-    }
-    async setNewPassword(req,res,next) {
-        try {
-            await userService.setNewPassword(req.body);
-        }
-        catch(e) {
-            next(e)
-        }
-    }
-    async activateLink(req,res,next) {
-        try{
-            await userService.activateLink(req.body.link);
-            return res.json({message:"ok"})
-        }
-        catch(e){
-            next(e)
-        }
-    }
-    async logout(req,res) {
-        try {
-            const {refreshToken} = req.cookies;
-            const token = await userService.logout(refreshToken)
-            res.clearCookie("refreshToken")
-            return res.json(token);
         }
         catch(e) {
             next(e)
@@ -75,6 +48,7 @@ class AuthController {
     async refresh(req,res,next) {
         try {
             const {refreshToken} = req.cookies;
+            console.log(refreshToken)
             const userData = await userService.refresh(refreshToken)
             res.cookie("refreshToken",userData.refreshToken,{maxAge:30*24*60*60*1000,httpOnly:true})
             return res.json(userData)

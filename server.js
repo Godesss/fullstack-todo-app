@@ -14,19 +14,21 @@ import tasks from "./routes/tasks.js"
 import { errorMiddle } from "./middlewares/errorMiddle.js";
 
 const app = express();
+
 const corsOptions = {
-    origin : `${process.env.BASE_URL}`,
     credentials:true,
+    origin:"http://localhost:3000"
 }
+app.use(express.json())
+app.use(express.urlencoded({ extended: false }));
 app.use(cors(corsOptions))
 app.use(cookieParser());
-app.use(express.urlencoded({ extended: true }));
-app.use(express.json())
 
 app.use("/user",registration)
 app.use("/methods",tasks)
 app.use(errorMiddle)
 app.use(express.static(path.join(__dirname,"dist")));
+
 app.get('*', function(req, res) {
     res.sendFile(path.join(__dirname+'/dist/index.html'));
 });

@@ -16,10 +16,7 @@ router.post("/login",
     body("email").isEmail(),
     authController.login)
 router.post("/resetpassword",authController.resetPassword)
-router.post("/setnewpassword", authController.setNewPassword)
 router.post("/validatetoken", authController.validateToken)
-router.post("/activate/:link", authController.activateLink)
-router.post("/logout", authController.logout)
 router.get("/refresh", authController.refresh)
 
 export default router
