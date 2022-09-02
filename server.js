@@ -12,7 +12,7 @@ import tasks from "./routes/tasks.js"
 const app = express()
 
 const corsOptions = {
-	origin: ["http://localhost:3000", "*"],
+	origin: ["http://localhost:3000", "*", "https://shimmering-chebakia-2391d8.netlify.app"],
 	credentials: true,
 }
 app.use(cookieParser())
