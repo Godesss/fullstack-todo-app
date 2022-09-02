@@ -15,7 +15,6 @@ import tasks from "./routes/tasks.js"
 const app = express()
 
 const corsOptions = {
-	credentials: true,
 	origin: "*",
 }
 app.use(express.json())
