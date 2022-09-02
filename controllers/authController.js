@@ -9,7 +9,12 @@ class AuthController {
 				return next(ErrorHandler.badRequest("incorect fields", "formFields", errors))
 			}
 			const userData = await userService.registration(req.body)
-			res.cookie("refreshToken", userData.refreshToken, { maxAge: 30 * 24 * 60 * 60 * 1000, secure: false })
+			res.cookie("refreshToken", userData.refreshToken, {
+				maxAge: 30 * 24 * 60 * 60 * 1000,
+				secure: false,
+				sameSite: "None",
+				httpOnly: true,
+			})
 			return res.json(userData)
 		} catch (e) {
 			next(e)
@@ -23,7 +28,12 @@ class AuthController {
 		try {
 			const userData = await userService.login(req.body)
 			console.log("userData", userData)
-			res.cookie("refreshToken", userData.refreshToken, { maxAge: 30 * 24 * 60 * 60 * 1000, secure: false })
+			res.cookie("refreshToken", userData.refreshToken, {
+				maxAge: 30 * 24 * 60 * 60 * 1000,
+				secure: false,
+				sameSite: "None",
+				httpOnly: true,
+			})
 			console.log("cookies", req.cookies)
 			return res.json(userData)
 		} catch (e) {
@@ -45,7 +55,12 @@ class AuthController {
 			console.log("refreshToken", refreshToken)
 			console.log("all cookies", req.cookies)
 			const userData = await userService.refresh(refreshToken)
-			res.cookie("refreshToken", userData.refreshToken, { maxAge: 30 * 24 * 60 * 60 * 1000, secure: false })
+			res.cookie("refreshToken", userData.refreshToken, {
+				maxAge: 30 * 24 * 60 * 60 * 1000,
+				secure: false,
+				sameSite: "None",
+				httpOnly: true,
+			})
 			return res.json(userData)
 		} catch (e) {
 			next(e)
