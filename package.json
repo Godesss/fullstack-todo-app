@@ -5,8 +5,7 @@
 	"type": "module",
 	"scripts": {
 		"server": "nodemon  server.js",
-		"start": "node server.js",
-		"heroku-postbuild": "NPM_CONFIG_PRODUCTION=false npm install --prefix client npm run build --prefix client"
+		"start": "node server.js"
 	},
 	"dependencies": {
 		"bcrypt": "^5.0.1",
