@@ -19,7 +19,7 @@ app.use(cookieParser())
 app.use(express.json())
 app.use(express.urlencoded({ extended: false }))
 app.use(cors(corsOptions))
-
+app.options("*", cors(corsConfig))
 app.use("/user", registration)
 app.use("/methods", tasks)
 app.use(errorMiddle)
