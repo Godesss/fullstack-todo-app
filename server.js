@@ -5,9 +5,6 @@ import express from "express"
 import mongoose from "mongoose"
 dotenv.config()
 
-import path from "path"
-const __dirname = path.resolve()
-
 import { errorMiddle } from "./middlewares/errorMiddle.js"
 import registration from "./routes/auth.js"
 import tasks from "./routes/tasks.js"
@@ -26,7 +23,6 @@ app.use(cors(corsOptions))
 app.use("/user", registration)
 app.use("/methods", tasks)
 app.use(errorMiddle)
-app.use(express.static(path.join(__dirname, "dist")))
 
 const start = async () => {
 	try {
